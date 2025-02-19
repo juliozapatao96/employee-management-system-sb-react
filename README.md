@@ -32,7 +32,7 @@ Este proyecto es un **sistema de gestión de empleados** desarrollado con **Spri
 ## **Instalación y ejecución** 💻  
 1️⃣ Clonar este repositorio:  
    ```sh
-   git clone https://github.com/tu-usuario/tu-repositorio.git
+   git clone https://github.com/juliozapatao96/employee-management-system-sb-react.git
    ```
 
 2️⃣  Backend: Navegar a la carpeta ems-backend/ y ejecutar:  
