@@ -36,7 +36,7 @@ build/
 ems-frontend/node_modules/
 ems-frontend/build/
 ems-frontend/.env
-ems-frontend/.vite
+#ems-frontend/.vite
 
 # Logs
 logs
