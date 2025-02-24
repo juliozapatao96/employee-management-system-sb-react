@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { createEmployee } from '../services/EmployeeService'
-import { useNavigate, useParams } from 'react-router-dom'
+import { getEmployee } from '../services/EmployeeService'
+import { useNavigate, useParams} from 'react-router-dom'
 
 const AddEmployeeComponent = () => {
 
@@ -18,6 +19,19 @@ const AddEmployeeComponent = () => {
     })
 
     const nagivator = useNavigate();
+
+    //populate form
+    useEffect(() => {
+        if(id){
+            getEmployee(id).then((response) => {
+                setFirstName(response.data.firstName);
+                setLastName(response.data.lastName);
+                setEmail(response.data.email);
+            }).catch(error => {
+                console.error(error);e.error(error);
+            })
+        }
+    }, [id])
 
     function saveEmployee(e){
         e.preventDefault();
