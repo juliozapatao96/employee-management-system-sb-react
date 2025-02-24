@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { createEmployee } from '../services/EmployeeService'
 import { getEmployee } from '../services/EmployeeService'
+import { updateEmployee } from '../services/EmployeeService'
 import { useNavigate, useParams} from 'react-router-dom'
 
 const AddEmployeeComponent = () => {
@@ -28,22 +29,34 @@ const AddEmployeeComponent = () => {
                 setLastName(response.data.lastName);
                 setEmail(response.data.email);
             }).catch(error => {
-                console.error(error);e.error(error);
+                console.error(error);
             })
         }
     }, [id])
 
-    function saveEmployee(e){
+    function saveOrUpdateEmployee(e){
         e.preventDefault();
 
         if(validateForm()){
+
             const employee = {firstName, lastName, email}
             console.log(employee)
-    
-            createEmployee(employee).then((response) =>{
-                console.log(response.data);
-                nagivator('/employees')
-            })
+
+            if(id){
+                updateEmployee(id, employee).then((response) => {
+                    console.log(response.data);
+                    nagivator('/employees')
+                }).catch(error => {
+                    console.error(error);
+                })
+            } else {
+                createEmployee(employee).then((response) =>{
+                    console.log(response.data);
+                    nagivator('/employees')
+                }).catch(error => {
+                    console.error(error);
+                })
+            }
         }
 
     }
@@ -137,7 +150,7 @@ const AddEmployeeComponent = () => {
                             {errors.email && <div className='invalid-feedback'> {errors.email} </div>}
                         </div>
 
-                        <button className='btn btn-success' onClick={saveEmployee}>Submit</button>    
+                        <button className='btn btn-success' onClick={saveOrUpdateEmployee}>Submit</button>    
                     </form>
 
                 </div>
